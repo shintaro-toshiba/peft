@@ -1,0 +1,19 @@
+services:
+  python-cuda12.1.1-cudnn8:
+    container_name: peft_cuda121
+    build:
+      context: ./
+      dockerfile: ./docker/peft-gpu-custom/Dockerfile
+    working_dir: '/workspace'
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/workspace
+      - /workspace/.venv
+      - $HOME/.cache/huggingface/:$HOME/.cache/huggingface/
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]

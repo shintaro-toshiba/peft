@@ -1,0 +1,70 @@
+[project]
+name = "peft"
+version = "0.14.0"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "torch==2.5.0+cu121",
+    "hatchling>=1.22.5",
+    "editables>=0.5",
+    "wheel>=0.44.0",
+    "transformers>=4.44.2",
+    "setuptools>=70.0.0",
+    "ruff>=0.6.3",
+    "pytest>=8.3.2",
+    "datasets>=2.19.1",
+    "evaluate>=0.4.2",
+    "scipy",
+    "scikit-learn",
+    "tqdm>=4.64.1",
+    "simplejson>=3.19.3",
+    "trl>=0.10.1",
+    "bitsandbytes",
+    "accelerate>=1.1.1",
+    "notebook>=7.3.2",
+    "deepspeed>=0.16.3",
+    "matplotlib>=3.10.3",
+    "pandas>=2.2.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+
+[tool.uv]
+find-links = [
+    "https://download.pytorch.org/whl/cu121/torch",
+]
+
+[tool.uv.sources]
+peft = { path = "./src", editable = true }
+
+[dependency-groups]
+dev = [
+  "flash-attn>=2.6.3",
+]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "B", "I", "F401"]
+
+[tool.ruff.lint.isort]
+case-sensitive = false
+length-sort = false
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "tab"
+skip-magic-trailing-comma = false
+docstring-code-format = true
+docstring-code-line-length = 88
